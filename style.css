@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@600&family=Poppins:wght@300;400;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+
+  font-family: "Poppins", sans-serif;
+}
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 10vh;
+  width: 100vw;
+}
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+}
+.logo {
+  padding-right: 2vw;
+  padding-bottom: 2vh;
+  padding-top: 2vh;
+  margin-left: -2vw;
+
+  border: 1px solid #e5e5e5;
+  padding-left: 1vw;
+  border-top: none;
+  border-left: none;
+  border-bottom: none;
+}
+.location {
+  height: 10vh;
+}
+.location :nth-child(1) {
+  font-size: 1.5vw;
+  font-weight: 700;
+  line-height: 0vh;
+  margin-top: 20px;
+}
+.location :nth-child(2) {
+  font-weight: 100;
+  font-size: calc(1.5vw 1vw 2vw);
+}
+
+.search input {
+  position: relative;
+  bottom: 19px;
+  border: none;
+  left: 24px;
+  font-size: 15px;
+}
+.search i {
+  border: 1px solid #363636;
+
+  background-color: white;
+  border-radius: 15px;
+  padding-right: 40vw;
+
+  padding-left: 10px;
+  padding-top: 15px;
+}
+
+.nav-login ul {
+  display: flex;
+  list-style: none;
+  gap: 5vw;
+}
+.login {
+  font-size: 19px;
+  color: #363636;
+  margin-top: 1.5vh;
+}
+.my-cart {
+  color: white;
+  background-color: #e5e5e5;
+  font-size: 16px;
+  padding: 0.8vw;
+  font-weight: 600;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+}
+.contact {
+  display: none;
+}
+.sepration {
+  height: 2px;
+  width: 100vw;
+  background-color: #e5e5e5;
+}
+div img {
+  width: 100%;
+}
+.picture {
+  display: flex;
+  gap: 10px;
+}
+.pharmacy img {
+  width: 80%;
+  margin-left: 1vw;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.heading {
+  font-size: 2vw;
+  font-weight: 800;
+  margin-left: 2vw;
+  margin-top: 2vh;
+}
+.flex {
+  display: flex;
+}
+
+.card {
+  border: 1px solid #e5e5e5;
+  height: 286px;
+  width: 180px;
+  background-color: #ffffff;
+  margin-left: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+.img-main {
+  height: 140px;
+  width: 140px;
+  margin-left: 20px;
+}
+.time-div {
+  height: 15px;
+  width: 56.65px;
+  padding: 0px 4px;
+  font-size: 9px;
+  margin-left: 20px;
+}
+.time {
+  height: 11px;
+  width: 11px;
+}
+.para {
+  margin-left: 20px;
+  font-size: 13px;
+}
+.quantity {
+  margin-left: 20px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+.price {
+  margin-left: -12px;
+  margin-top: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1px;
+}
+.discount {
+  margin-left: 20px;
+  text-decoration: line-through;
+  font-size: 12px;
+  font-weight: 400;
+  position: relative;
+  bottom: 22px;
+}
+.add-btn {
+  font-size: 13px;
+  background-color: #f7fff9;
+  border: 2px solid #318616;
+  height: 33px;
+  width: 68px;
+  border-radius: 5px;
+  margin-top: 22px;
+}
+.card-flex {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: 1200px) {
+  .logo {
+    display: none;
+  }
+  .login {
+    display: none;
+  }
+  .my-cart {
+    display: none;
+  }
+  .contact {
+    display: inline;
+    font-size: 3vw;
+    color: rgb(0, 0, 0);
+    position: relative;
+    right: 9vw;
+  }
+  .nav {
+    flex-direction: column;
+  }
+  .location {
+    margin-top: 12vh;
+    margin-right: 62vw;
+  }
+  .search {
+    margin-left: 4vw;
+  }
+  .search i {
+    padding-right: 90vw;
+  }
+
+  .sepration {
+    display: none;
+  }
+}
