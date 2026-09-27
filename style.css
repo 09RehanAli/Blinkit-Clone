@@ -1,182 +1,370 @@
 @import url("https://fonts.googleapis.com/css2?family=Martel+Sans:wght@600&family=Poppins:wght@300;400;700&display=swap");
+
+/* ==========================================================================
+   GLOBAL RESET
+   - box-sizing: border-box makes padding/border count INSIDE the width
+     we set, instead of adding to it. Without this, fixed-width cards +
+     padding = overflow on small screens. This one line fixes a LOT of
+     mobile bugs before they happen.
+   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
-
+  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
+/* Prevents any single element (like a wide image) from creating
+   horizontal scroll on the whole page. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   NAVBAR (desktop / default styles)
+   ========================================================================== */
+/* nav is the top-level flex row. It has 3 direct children in the HTML:
+   .logo, .nav (address + search), .nav-login (login/cart/account).
+   We use the CSS `order` property below to visually rearrange them
+   WITHOUT touching the HTML: address ends up on the left, the search
+   bar centered, and the logo pinned to the top-right corner. */
 nav {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  height: 10vh;
-  width: 100vw;
+  justify-content: space-between; /* pushes the left group and the right
+                                      group apart, with the flexible
+                                      middle group (search) filling the
+                                      gap between them */
+  flex-wrap: wrap;
+  width: 100%; /* changed from 100vw: 100vw ignores the scrollbar width and
+                  causes a tiny horizontal overflow on some browsers */
+  padding: 10px 24px;
+  gap: 16px;
 }
+
+/* .nav wraps the address (.location) and the search bar. Giving it
+   flex:1 lets it take up all the leftover space between the logo and
+   the login/cart group, and order:1 keeps this whole block first
+   (left side of the screen). */
 .nav {
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex: 1;
+  min-width: 0; /* allows this flex child to shrink below its content
+                   size instead of forcing the row to overflow */
   gap: 2vw;
+  flex-wrap: wrap;
+  order: 1;
 }
+
+/* Address block: stays put on the far left of the .nav group. */
+.location {
+  order: 1;
+  flex-shrink: 0;
+}
+
+/* Search block: takes the remaining space and centers its contents,
+   so the search bar visually sits in the middle of the navbar instead
+   of hugging the address text. */
+.search {
+  order: 2;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* Login + cart group: sits just left of the logo. */
+.nav-login {
+  order: 2;
+}
+
 .logo {
+  order: 1; /* moves the logo to the very end of the flex row, i.e. the
+               top-right corner of the screen */
   padding-right: 2vw;
   padding-bottom: 2vh;
   padding-top: 2vh;
-  margin-left: -2vw;
-
-  border: 1px solid #e5e5e5;
   padding-left: 1vw;
+  border: 1px solid #e5e5e5;
   border-top: none;
   border-left: none;
   border-bottom: none;
 }
+
+.logo img {
+  width: 120px; /* fixed logical size instead of "width:100%" from the
+                    global img rule, so the logo never stretches oddly */
+}
+
 .location {
-  height: 10vh;
+  height: auto;
 }
+
 .location :nth-child(1) {
-  font-size: 1.5vw;
+  /* clamp(min, preferred, max) keeps text readable at every screen size:
+     it will never shrink below 14px or grow past 20px, no matter what
+     1.5vw calculates to on a huge or tiny screen. */
+  font-size: clamp(14px, 1.5vw, 20px);
   font-weight: 700;
-  line-height: 0vh;
-  margin-top: 20px;
+  line-height: 1.4;
 }
+
 .location :nth-child(2) {
   font-weight: 100;
-  font-size: calc(1.5vw 1vw 2vw);
+  font-size: clamp(12px, 1.2vw, 16px);
+}
+
+/* Search bar
+   NOTE: the original used huge vw-based padding-right on the <i> icon to
+   fake a search box width. That approach breaks badly on small screens
+   (the padding becomes bigger than the screen itself). Rebuilt below with
+   a flexible container + max-width instead. */
+.search {
+  width: 100%;
+  max-width: 420px;
+}
+
+.search i {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: 1px solid #363636;
+  background-color: white;
+  border-radius: 15px;
+  padding: 12px 16px;
 }
 
 .search input {
-  position: relative;
-  bottom: 19px;
   border: none;
-  left: 24px;
+  outline: none;
   font-size: 15px;
-}
-.search i {
-  border: 1px solid #363636;
-
-  background-color: white;
-  border-radius: 15px;
-  padding-right: 40vw;
-
-  padding-left: 10px;
-  padding-top: 15px;
+  width: 100%;
+  background: transparent;
 }
 
 .nav-login ul {
   display: flex;
   list-style: none;
-  gap: 5vw;
+  /* clamp instead of a raw 5vw: on very wide desktop monitors 5vw can
+     grow past 100px and start crowding/overflowing the navbar */
+  gap: clamp(16px, 2vw, 32px);
+  align-items: center;
 }
+
 .login {
   font-size: 19px;
   color: #363636;
-  margin-top: 1.5vh;
+  cursor: pointer;
 }
+
 .my-cart {
   color: white;
   background-color: #e5e5e5;
   font-size: 16px;
-  padding: 0.8vw;
+  padding: 0.8vw 1.2vw;
   font-weight: 600;
   border: 1px solid #e5e5e5;
   border-radius: 10px;
+  white-space: nowrap; /* keeps "My Cart" from wrapping mid-word */
+  cursor: pointer;
 }
+
+/* Mobile-only account icon, hidden on desktop (shown via media query below) */
 .contact {
   display: none;
+  cursor: pointer;
 }
+
 .sepration {
   height: 2px;
-  width: 100vw;
+  width: 100%;
   background-color: #e5e5e5;
 }
-div img {
+
+/* ==========================================================================
+   HERO BANNER
+   ========================================================================== */
+.hero img {
   width: 100%;
+  height: auto;
+  object-fit: cover;
 }
+
+/* ==========================================================================
+   3 PROMO BANNERS (pharmacy / pet / baby)
+   Desktop: sit side by side.
+   ========================================================================== */
 .picture {
   display: flex;
+  flex-wrap: wrap; /* allows stacking once space runs out */
   gap: 10px;
+  padding: 10px;
 }
+
+.pharmacy {
+  flex: 1 1 280px; /* grow/shrink, but never go narrower than ~280px —
+                       below that width it wraps to the next line */
+}
+
 .pharmacy img {
-  width: 80%;
-  margin-left: 1vw;
+  width: 100%;
+  margin-left: 0; /* removed the vw-based margin so banners align cleanly
+                      at every screen size */
+  border-radius: 8px;
 }
+
+/* ==========================================================================
+   CATEGORY ICON GRID (paan corner, groceries, etc.)
+   Desktop: 10 columns across.
+   ========================================================================== */
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 12px;
+  padding: 20px;
 }
+
+/* ==========================================================================
+   SECTION HEADING ("Dairy, Bread & Eggs" etc.)
+   ========================================================================== */
 .heading {
-  font-size: 2vw;
+  font-size: clamp(18px, 2vw, 26px);
   font-weight: 800;
   margin-left: 2vw;
   margin-top: 2vh;
 }
+
+/* ==========================================================================
+   PRODUCT CARD ROWS
+   Desktop: cards in a straight horizontal row.
+   Original had `display:flex` with NO wrap and fixed-width 180px cards —
+   on any screen narrower than (num-cards * 180px) this silently overflows
+   and creates horizontal scroll. flex-wrap fixes that, and letting the
+   card width flex (instead of a hard 180px) lets cards reflow into a
+   clean grid at every screen size. */
 .flex {
   display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0 20px;
 }
 
 .card {
   border: 1px solid #e5e5e5;
   height: 286px;
   width: 180px;
+  flex: 0 1 180px; /* don't grow past 180px, but allow shrinking so cards
+                       can shrink together on tighter screens */
   background-color: #ffffff;
-  margin-left: 20px;
-  margin-top: 20px;
+  margin: 0; /* margin now handled by the .flex "gap" above instead of
+                per-card margin-left/margin-top, which is more reliable
+                when items wrap to a new line */
   border-radius: 8px;
+  padding-bottom: 10px;
+  overflow: hidden; /* safety net: nothing (long text, a stray image) can
+                        visually spill past the card's own border */
 }
+
 .img-main {
   height: 140px;
   width: 140px;
-  margin-left: 20px;
+  margin: 12px auto 0; /* centered instead of a hard-coded left margin */
 }
+
 .time-div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   height: 15px;
-  width: 56.65px;
+  width: fit-content;
   padding: 0px 4px;
   font-size: 9px;
   margin-left: 20px;
 }
+
 .time {
   height: 11px;
   width: 11px;
 }
+
 .para {
   margin-left: 20px;
+  margin-right: 12px;
   font-size: 13px;
+  line-height: 1.3;
+  overflow-wrap: break-word;
+  /* -webkit-line-clamp caps the product name at 2 lines and adds an
+     ellipsis (…) if it's longer — this is what actually stops long
+     names like "White Rolling Paper with Crushing Tray - Blaze Up"
+     from overflowing past the card and keeps every card the same
+     height regardless of title length. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6em; /* reserves 2 lines of space even for short titles,
+                         so price/button stay aligned across cards */
 }
+
 .quantity {
   margin-left: 20px;
   margin-top: 10px;
   font-size: 12px;
+  color: #6b6b6b;
 }
+
+.card-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  margin-top: 10px;
+}
+
 .price {
-  margin-left: -12px;
-  margin-top: 30px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  line-height: 1px;
 }
+
 .discount {
   margin-left: 20px;
+  position: relative;
+  bottom: 10px;
   text-decoration: line-through;
   font-size: 12px;
   font-weight: 400;
-  position: relative;
-  bottom: 22px;
+  color: #9a9a9a;
 }
+
 .add-btn {
   font-size: 13px;
   background-color: #f7fff9;
   border: 2px solid #318616;
+  color: #318616;
   height: 33px;
   width: 68px;
   border-radius: 5px;
-  margin-top: 22px;
-}
-.card-flex {
-  display: flex;
-  justify-content: space-evenly;
+  cursor: pointer;
 }
 
+/* ============================================================================
+   RESPONSIVE BREAKPOINTS
+   Mobile-first tip for next time: writing base styles for mobile and using
+   min-width media queries to add complexity for larger screens is usually
+   easier to maintain. Here we go the other way (max-width) to match the
+   structure you already had, from largest breakpoint to smallest.
+   ============================================================================ */
+
+/* ---------- TABLET (large tablets / small laptops, <=1200px) ---------- */
 @media screen and (max-width: 1200px) {
   .logo {
     display: none;
@@ -188,27 +376,137 @@ div img {
     display: none;
   }
   .contact {
-    display: inline;
-    font-size: 3vw;
-    color: rgb(0, 0, 0);
-    position: relative;
-    right: 9vw;
+    display: inline-block;
+    font-size: 24px;
+    color: #000;
   }
+
+  nav {
+    flex-direction: row;
+    height: auto;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
   .nav {
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
   }
+
   .location {
-    margin-top: 12vh;
-    margin-right: 62vw;
+    text-align: center;
+    margin: 0;
   }
+
   .search {
-    margin-left: 4vw;
+    max-width: 100%;
   }
-  .search i {
-    padding-right: 90vw;
+
+  .nav-login ul {
+    gap: 20px;
   }
 
   .sepration {
     display: none;
+  }
+
+  /* category icons: 5 across instead of 10, so each icon stays a
+     legible size instead of shrinking to a sliver */
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ---------- TABLET (portrait tablets, <=900px) ---------- */
+@media screen and (max-width: 900px) {
+  .picture {
+    flex-direction: column; /* stack the 3 promo banners */
+  }
+
+  .pharmacy {
+    flex: 1 1 100%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 16px;
+  }
+
+  /* center the product-card rows so the last (partial) row doesn't look
+     stranded on the left */
+  .flex {
+    justify-content: center;
+  }
+}
+
+/* ---------- MOBILE (phones, <=600px) ---------- */
+@media screen and (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .heading {
+    margin-left: 16px;
+    font-size: 18px;
+  }
+
+  .flex {
+    padding: 0 16px;
+    gap: 12px;
+    justify-content: space-between; /* two cards per row, evenly spaced */
+  }
+
+  /* two cards per row: each card takes ~48% of the row width minus gap,
+     instead of a fixed 180px which no longer fits comfortably */
+  .card {
+    flex: 0 1 47%;
+    width: auto;
+    height: auto;
+    min-height: 260px;
+  }
+
+  .img-main {
+    width: 100%;
+    max-width: 130px;
+    height: 110px;
+  }
+
+  .card-flex {
+    padding: 0 12px;
+  }
+
+  .search i {
+    padding: 10px 12px;
+  }
+}
+
+/* ---------- SMALL MOBILE (narrow phones, <=380px) ---------- */
+@media screen and (max-width: 380px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: 10px;
+  }
+
+  /* one card per row on very narrow phones so text and buttons still
+     have room to breathe */
+  .card {
+    flex: 1 1 100%;
+  }
+
+  .para {
+    font-size: 12px;
+  }
+  .contact {
+    position: relative;
+    bottom: -3px;
+  }
+}
+@media screen and (max-width: 262px) {
+  .contact {
+    position: relative;
+    bottom: 30px;
   }
 }
