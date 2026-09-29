@@ -16,10 +16,10 @@
 
 /* Prevents any single element (like a wide image) from creating
    horizontal scroll on the whole page. */
-html,
+
 body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img {
@@ -35,6 +35,12 @@ img {
    We use the CSS `order` property below to visually rearrange them
    WITHOUT touching the HTML: address ends up on the left, the search
    bar centered, and the logo pinned to the top-right corner. */
+header {
+  position: sticky;
+  top: 0px;
+  z-index: 1000;
+  background-color: #ffffff;
+}
 nav {
   display: flex;
   align-items: center;
@@ -410,7 +416,9 @@ ul {
   margin-top: 2vh;
   margin-bottom: 2vh;
 }
-
+.light {
+  display: none;
+}
 /* ============================================================================
    RESPONSIVE BREAKPOINTS
    Mobile-first tip for next time: writing base styles for mobile and using
@@ -478,6 +486,7 @@ ul {
     display: none;
   }
   .light {
+    display: block;
     margin-top: 10px;
   }
 
