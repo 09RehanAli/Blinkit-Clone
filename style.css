@@ -260,7 +260,7 @@ nav {
 
 .card {
   border: 1px solid #e5e5e5;
-  height: 286px;
+  height: 296px;
   width: 180px;
   flex: 0 1 180px; /* don't grow past 180px, but allow shrinking so cards
                        can shrink together on tighter screens */
@@ -337,7 +337,7 @@ nav {
 .discount {
   margin-left: 20px;
   position: relative;
-  bottom: 10px;
+  bottom: 16px;
   text-decoration: line-through;
   font-size: 12px;
   font-weight: 400;
@@ -464,6 +464,21 @@ ul {
 
   .sepration {
     display: none;
+  }
+  .footer {
+    display: none;
+  }
+  .footer_main {
+    display: none;
+  }
+  .footer_logo {
+    display: none;
+  }
+  .rights {
+    display: none;
+  }
+  .light {
+    margin-top: 10px;
   }
 
   /* category icons: 5 across instead of 10, so each icon stays a

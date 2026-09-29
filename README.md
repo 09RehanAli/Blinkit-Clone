@@ -9,7 +9,7 @@ A static, responsive front-end clone of the **Blinkit** quick-commerce website, 
 ## 📸 Preview
 
 > Add a screenshot of your website here.
-> Example: `![Blinkit Clone Preview](assets/preview.png)`
+> Example: `![Blinkit Clone Preview](/assets/preview1.png)`
 
 ---
 
@@ -24,7 +24,7 @@ A static, responsive front-end clone of the **Blinkit** quick-commerce website, 
   - Product name and weight
   - Discounted price and original price
   - ADD button
-- **Product categories** such as *Dairy, Bread & Eggs* and *Rolling Paper & Tobacco*
+- **Product categories** such as _Dairy, Bread & Eggs_ and _Rolling Paper & Tobacco_
 - **Detailed footer** with useful links, category lists, and app download badges (App Store / Play Store)
 - Clean layout that closely follows the original Blinkit design
 
@@ -32,10 +32,10 @@ A static, responsive front-end clone of the **Blinkit** quick-commerce website, 
 
 ## 🛠️ Tech Stack
 
-| Technology | Purpose |
-|------------|---------|
-| HTML5 | Page structure and content |
-| CSS3 | Styling, layout (Flexbox / Grid), and responsiveness |
+| Technology | Purpose                                              |
+| ---------- | ---------------------------------------------------- |
+| HTML5      | Page structure and content                           |
+| CSS3       | Styling, layout (Flexbox / Grid), and responsiveness |
 
 ---
 
@@ -58,11 +58,13 @@ Blinkit-Clone/
 ### Run locally
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/09rehanali/Blinkit-Clone.git
    ```
 
 2. **Go to the project folder**
+
    ```bash
    cd Blinkit-Clone
    ```
