@@ -242,6 +242,7 @@ nav {
 /* ==========================================================================
    SECTION HEADING ("Dairy, Bread & Eggs" etc.)
    ========================================================================== */
+
 .heading {
   font-size: clamp(18px, 2vw, 26px);
   font-weight: 800;
@@ -257,6 +258,7 @@ nav {
    and creates horizontal scroll. flex-wrap fixes that, and letting the
    card width flex (instead of a hard 180px) lets cards reflow into a
    clean grid at every screen size. */
+
 .flex {
   display: flex;
   flex-wrap: wrap;
@@ -417,6 +419,15 @@ ul {
   margin-bottom: 2vh;
 }
 .light {
+  display: none;
+}
+
+/* due to blinkit update there site so this section is hidden in there main website */
+
+.heading {
+  display: none;
+}
+.card {
   display: none;
 }
 /* ============================================================================
