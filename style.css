@@ -170,6 +170,12 @@ nav {
   font-size: 19px;
   color: #363636;
   cursor: pointer;
+  margin-right: 2vw;
+  font-weight: 100;
+}
+.login > a {
+  text-decoration: none;
+  color: black;
 }
 
 .my-cart {
