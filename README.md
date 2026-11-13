@@ -1,6 +1,6 @@
 # 🛒 Blinkit Clone
 
-A static, responsive front-end clone of the **Blinkit** quick-commerce website, built using **HTML** and **CSS**. This project recreates the look and layout of Blinkit's home page, including the header, hero banner, category grid, product sections, and footer.
+A static, responsive front-end clone of the **Blinkit** quick-commerce website, built using **HTML** and **CSS**. This project recreates the look and layout of Blinkit's home page, including the header, hero banner, category grid, product sections, and footer
 
 🔗 **Live Demo:** [https://09rehanali.github.io/Blinkit-Clone/](https://09rehanali.github.io/Blinkit-Clone/)
 
